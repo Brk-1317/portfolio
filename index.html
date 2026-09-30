@@ -1,0 +1,1004 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<title>Breno Caetano | Dados, BI e Automação</title>
+<meta name="description" content="Portfólio profissional de Breno Caetano, Analista de Dados focado em Business Intelligence, automação de processos e desenvolvimento de soluções digitais.">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=Instrument+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  /* ===========================================================
+     Direção: linguagem de instrumento de medição.
+     Hairlines, tick marks e numerais mono como sistema.
+     Acento âmbar único sobre ink frio.
+     =========================================================== */
+  :root{
+    --bg:        #0a0c10;
+    --bg-2:      #0d1015;
+    --surface:   #10131a;
+    --surface-2: #141822;
+    --ink:       #e8eaed;
+    --ink-2:     #9aa3b0;
+    --muted:     #737d8c;
+    --rule:      #1c2029;
+    --rule-2:    #262c38;
+    --accent:    #e0a338;
+    --accent-2:  #f0bc5e;
+    --accent-dk: #7a5a1e;
+
+    --max: 1120px;
+    --gut: clamp(20px, 5vw, 64px);
+
+    --s1: 8px;  --s2: 16px; --s3: 24px; --s4: 32px;
+    --s5: 48px; --s6: 72px; --s7: 104px; --s8: 140px;
+
+    --sans: "Instrument Sans", system-ui, -apple-system, "Segoe UI", sans-serif;
+    --mono: "IBM Plex Mono", ui-monospace, SFMono-Regular, monospace;
+
+    --ease: cubic-bezier(.22,.61,.36,1);
+    color-scheme: dark;
+  }
+
+  *{box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  html:focus-within{scroll-padding-top:96px}
+
+  body{
+    margin:0; background:var(--bg); color:var(--ink);
+    font-family:var(--sans); font-size:16px; line-height:1.6;
+    -webkit-font-smoothing:antialiased; overflow-x:hidden;
+  }
+  .mono{font-family:var(--mono); font-variant-numeric:tabular-nums}
+  .sr{position:absolute; width:1px; height:1px; padding:0; margin:-1px; overflow:hidden; clip:rect(0 0 0 0); white-space:nowrap; border:0}
+  .shell{max-width:var(--max); margin:0 auto; padding-inline:var(--gut)}
+
+  a{color:inherit}
+  :focus-visible{outline:2px solid var(--accent); outline-offset:3px; border-radius:2px}
+
+  .skip{
+    position:absolute; left:-9999px; top:0; background:var(--accent); color:#0a0c10;
+    padding:10px 18px; font-weight:600; z-index:200; border-radius:0 0 6px 0;
+  }
+  .skip:focus{left:0}
+
+  /* ---------- HEADER ---------- */
+  .hd{
+    position:fixed; inset:0 0 auto 0; z-index:100;
+    padding-top:env(safe-area-inset-top, 0px);
+    background:color-mix(in srgb, var(--bg) 88%, transparent);
+    border-bottom:1px solid transparent;
+    transition:border-color .3s var(--ease), background .3s var(--ease);
+  }
+  .hd.stuck{border-bottom-color:var(--rule); backdrop-filter:blur(10px)}
+  .hd .shell{display:flex; align-items:center; justify-content:space-between; height:68px}
+  .brand{
+    font-weight:600; font-size:15.5px; letter-spacing:-0.01em;
+    text-decoration:none; display:inline-flex; align-items:center; gap:9px;
+  }
+  .brand .pip{width:6px; height:6px; background:var(--accent); border-radius:1px; flex:none}
+
+  .nav{display:flex; gap:2px}
+  .nav a{
+    font-size:14px; color:var(--ink-2); text-decoration:none; padding:8px 13px;
+    position:relative; transition:color .2s var(--ease);
+  }
+  .nav a::after{
+    content:""; position:absolute; left:13px; right:13px; bottom:3px; height:1px;
+    background:var(--accent); transform:scaleX(0); transform-origin:left;
+    transition:transform .28s var(--ease);
+  }
+  .nav a:hover{color:var(--ink)}
+  .nav a:hover::after, .nav a[aria-current="true"]::after{transform:scaleX(1)}
+  .nav a[aria-current="true"]{color:var(--ink)}
+
+  .burger{
+    display:none; background:none; border:1px solid var(--rule-2); border-radius:5px;
+    width:40px; height:36px; cursor:pointer; padding:0; position:relative;
+  }
+  .burger span{
+    position:absolute; left:11px; right:11px; height:1.5px; background:var(--ink);
+    transition:transform .3s var(--ease), opacity .2s var(--ease);
+  }
+  .burger span:nth-child(1){top:13px}
+  .burger span:nth-child(2){top:18.5px}
+  .burger span:nth-child(3){top:24px}
+  .burger[aria-expanded="true"] span:nth-child(1){transform:translateY(5.5px) rotate(45deg)}
+  .burger[aria-expanded="true"] span:nth-child(2){opacity:0}
+  .burger[aria-expanded="true"] span:nth-child(3){transform:translateY(-5.5px) rotate(-45deg)}
+
+  @media (max-width:860px){
+    .burger{display:block}
+    .nav{
+      position:fixed; inset:calc(68px + env(safe-area-inset-top,0px)) 0 auto 0;
+      flex-direction:column; gap:0; background:var(--bg-2);
+      border-bottom:1px solid var(--rule); padding:var(--s2) var(--gut) var(--s4);
+      transform:translateY(-12px); opacity:0; pointer-events:none;
+      transition:transform .3s var(--ease), opacity .25s var(--ease);
+    }
+    .nav[data-open="true"]{transform:none; opacity:1; pointer-events:auto}
+    .nav a{padding:13px 0; font-size:17px; border-bottom:1px solid var(--rule)}
+    .nav a::after{display:none}
+  }
+
+  /* ---------- seções ---------- */
+  section{padding-block:var(--s8)}
+  @media (max-width:760px){ section{padding-block:var(--s7)} }
+
+  .lbl{
+    font-family:var(--mono); font-size:11.5px; letter-spacing:.18em; text-transform:uppercase;
+    color:var(--muted); display:flex; align-items:center; gap:12px; margin-bottom:var(--s4);
+  }
+  .lbl::after{content:""; flex:1; height:1px; background:var(--rule)}
+  .lbl b{color:var(--accent); font-weight:400}
+
+  h2{
+    font-size:clamp(28px,4.2vw,40px); font-weight:600; letter-spacing:-0.028em;
+    line-height:1.12; margin:0 0 var(--s3); max-width:20ch; text-wrap:balance;
+  }
+  h3{font-size:20px; font-weight:600; letter-spacing:-0.015em; margin:0}
+  p{margin:0 0 var(--s2)}
+  p:last-child{margin-bottom:0}
+  .dim{color:var(--ink-2)}
+  .measure{max-width:60ch}
+
+  /* ---------- HERO ---------- */
+  .hero{
+    padding-top:calc(68px + var(--s8)); padding-bottom:var(--s8);
+    position:relative; overflow:hidden;
+  }
+  .hero .grid-bg{
+    position:absolute; inset:0; pointer-events:none;
+    background-image:
+      linear-gradient(to right, var(--rule) 1px, transparent 1px),
+      linear-gradient(to bottom, var(--rule) 1px, transparent 1px);
+    background-size:72px 72px;
+    -webkit-mask-image:radial-gradient(ellipse 70% 60% at 30% 35%, #000 0%, transparent 72%);
+    mask-image:radial-gradient(ellipse 70% 60% at 30% 35%, #000 0%, transparent 72%);
+    opacity:.55;
+  }
+  .hero .shell{position:relative}
+  .hero-grid{display:grid; grid-template-columns:1.15fr .85fr; gap:var(--s6); align-items:center}
+  @media (max-width:940px){ .hero-grid{grid-template-columns:1fr; gap:var(--s5)} }
+
+  .eyebrow{
+    font-family:var(--mono); font-size:12px; letter-spacing:.16em; text-transform:uppercase;
+    color:var(--accent); margin-bottom:var(--s3);
+  }
+  h1{
+    font-size:clamp(40px,7.4vw,72px); font-weight:600; line-height:1.02;
+    letter-spacing:-0.04em; margin:0 0 var(--s3); text-wrap:balance;
+  }
+  .hero .sub{font-size:clamp(16px,2vw,18.5px); color:var(--ink-2); max-width:46ch; margin-bottom:var(--s4)}
+  .techline{
+    font-family:var(--mono); font-size:12.5px; color:var(--muted);
+    display:flex; flex-wrap:wrap; gap:8px 6px; align-items:center; margin-bottom:var(--s5);
+  }
+  .techline span:not(:last-child)::after{content:"·"; color:var(--muted); margin-left:7px}
+
+  .ctas{display:flex; flex-wrap:wrap; gap:12px}
+  .btn{
+    display:inline-flex; align-items:center; gap:10px; text-decoration:none;
+    font-size:14.5px; font-weight:600; padding:13px 22px; border-radius:5px;
+    transition:transform .2s var(--ease), background .2s var(--ease), border-color .2s var(--ease), color .2s var(--ease);
+  }
+  .btn-a{background:var(--accent); color:#0a0c10}
+  .btn-a:hover{background:var(--accent-2); transform:translateY(-2px)}
+  .btn-b{border:1px solid var(--rule-2); color:var(--ink)}
+  .btn-b:hover{border-color:var(--accent); color:var(--accent); transform:translateY(-2px)}
+  .btn .arw{transition:transform .25s var(--ease)}
+  .btn:hover .arw{transform:translateX(3px)}
+
+  /* plot do hero */
+  .plot{width:100%; height:auto; display:block}
+  .plot .axis{stroke:var(--rule-2); stroke-width:1}
+  .plot .tick{stroke:var(--rule-2); stroke-width:1}
+  .plot .tlabel{fill:var(--muted); font-family:var(--mono); font-size:9px}
+  .plot .series{fill:none; stroke:var(--accent); stroke-width:2; stroke-linecap:round; stroke-linejoin:round}
+  .plot .ghost{fill:none; stroke:var(--rule-2); stroke-width:1.5; stroke-dasharray:3 4}
+  .plot .pt{fill:var(--bg); stroke:var(--accent); stroke-width:2}
+  .plot .pt-hi{fill:var(--accent)}
+  .plot .band{fill:var(--accent); opacity:.06}
+
+  /* ---------- SOBRE ---------- */
+  .about{display:grid; grid-template-columns:.85fr 1.15fr; gap:var(--s6)}
+  @media (max-width:860px){ .about{grid-template-columns:1fr; gap:var(--s4)} }
+  .about p{font-size:17px}
+
+  /* ---------- SOLUÇÕES ---------- */
+  .sol{display:grid; grid-template-columns:1fr 1fr; border-top:1px solid var(--rule)}
+  @media (max-width:760px){ .sol{grid-template-columns:1fr} }
+  .sol article{
+    padding:var(--s5) var(--s4) var(--s5) 0; border-bottom:1px solid var(--rule);
+    position:relative; transition:padding-left .3s var(--ease);
+  }
+  .sol article:nth-child(odd){padding-right:var(--s5)}
+  .sol article:nth-child(even){padding-left:var(--s5); border-left:1px solid var(--rule)}
+  @media (max-width:760px){
+    .sol article, .sol article:nth-child(even){padding:var(--s4) 0; border-left:none}
+  }
+  .sol .idx{font-family:var(--mono); font-size:11.5px; color:var(--muted); margin-bottom:var(--s2); display:block; transition:color .3s var(--ease)}
+  .sol h3{margin-bottom:10px; transition:transform .3s var(--ease)}
+  .sol p{color:var(--ink-2); font-size:15.5px; max-width:42ch}
+  .sol article:hover .idx{color:var(--accent)}
+  .sol article:hover h3{transform:translateX(5px)}
+
+  /* ---------- PROJETOS ---------- */
+  .projects{display:flex; flex-direction:column; gap:var(--s4)}
+  .proj{
+    background:var(--surface); border:1px solid var(--rule); border-radius:6px;
+    overflow:hidden; display:grid; grid-template-columns:1.05fr 1fr;
+    transition:border-color .3s var(--ease), transform .3s var(--ease);
+  }
+  .proj:hover{border-color:var(--rule-2); transform:translateY(-3px)}
+  @media (max-width:860px){ .proj{grid-template-columns:1fr} }
+  .proj .body{padding:var(--s5) var(--s5) var(--s4)}
+  @media (max-width:560px){ .proj .body{padding:var(--s4) var(--s3)} }
+  .proj .kicker{
+    font-family:var(--mono); font-size:11px; letter-spacing:.14em; text-transform:uppercase;
+    color:var(--accent); margin-bottom:14px;
+  }
+  .proj h3{font-size:24px; letter-spacing:-0.02em; margin-bottom:12px}
+  .proj .desc{color:var(--ink-2); font-size:15.5px; max-width:46ch; margin-bottom:var(--s3)}
+  .tags{display:flex; flex-wrap:wrap; gap:7px}
+  .tag{
+    font-family:var(--mono); font-size:11.5px; color:var(--ink-2);
+    border:1px solid var(--rule-2); border-radius:4px; padding:4px 10px;
+  }
+  .proj .live{
+    display:inline-flex; align-items:center; gap:9px; margin-top:var(--s3);
+    font-size:14px; font-weight:600; color:var(--accent); text-decoration:none;
+  }
+  .proj .live:hover{color:var(--accent-2)}
+  .proj .live .arw{transition:transform .25s var(--ease)}
+  .proj .live:hover .arw{transform:translateX(3px)}
+
+  .shot{
+    position:relative; background:var(--bg-2); border-left:1px solid var(--rule);
+    min-height:260px; display:flex; align-items:center; justify-content:center; padding:var(--s4);
+  }
+  @media (max-width:860px){ .shot{border-left:none; border-top:1px solid var(--rule); min-height:210px; order:-1} }
+  .shot svg{width:100%; height:auto; max-width:340px; display:block}
+  .shot.has-img{padding:0; overflow:hidden}
+  .shot.has-img img{
+    width:100%; height:100%; min-height:260px; object-fit:cover; object-position:top left;
+    display:block; filter:saturate(.92) contrast(1.02);
+    transition:transform .5s var(--ease), filter .4s var(--ease);
+  }
+  @media (max-width:860px){ .shot.has-img img{min-height:200px; object-position:top center} }
+  .proj:hover .shot.has-img img{transform:scale(1.02); filter:saturate(1) contrast(1)}
+  .shot.fit-square{background:var(--bg-2)}
+  .shot.fit-square img{object-fit:contain; object-position:center; padding:var(--s3)}
+  .shot .pend{
+    position:absolute; left:14px; bottom:12px; font-family:var(--mono); font-size:10px;
+    letter-spacing:.08em; text-transform:uppercase; color:var(--muted);
+    border:1px dashed var(--rule-2); border-radius:3px; padding:3px 8px;
+    background:color-mix(in srgb, var(--bg) 82%, transparent);
+  }
+  .mk-rule{stroke:var(--rule-2); stroke-width:1}
+  .mk-bar{fill:var(--rule-2)}
+  .mk-bar-hi{fill:var(--accent); opacity:.85}
+  .mk-line{fill:none; stroke:var(--accent); stroke-width:1.8; stroke-linecap:round; stroke-linejoin:round}
+  .mk-txt{fill:var(--rule-2)}
+  .shot.diag svg{max-width:330px}
+  .dg-t{fill:var(--ink-2); font-family:var(--mono); font-size:8.5px}
+  .dg-s{fill:var(--muted); font-family:var(--mono); font-size:7px}
+  .dg-c{fill:var(--muted); font-family:var(--mono); font-size:6.5px; letter-spacing:.12em}
+  .dg-l{fill:none; stroke:var(--rule-2); stroke-width:1.2}
+  .dg-dash{stroke:var(--accent); stroke-opacity:.55; stroke-dasharray:3 3}
+  .dg-div{stroke:var(--rule); stroke-width:1}
+
+  /* ---------- EXPERIÊNCIA ---------- */
+  .tl{border-top:1px solid var(--rule)}
+  .job{
+    display:grid; grid-template-columns:150px 1fr; gap:var(--s4);
+    padding-block:var(--s5); border-bottom:1px solid var(--rule); position:relative;
+  }
+  @media (max-width:720px){ .job{grid-template-columns:1fr; gap:var(--s2); padding-block:var(--s4)} }
+  .job .when{font-family:var(--mono); font-size:12.5px; color:var(--muted); padding-top:4px}
+  .job .when .now{color:var(--accent); display:block; margin-top:4px}
+  .job .org{
+    font-family:var(--mono); font-size:11.5px; letter-spacing:.13em; text-transform:uppercase;
+    color:var(--ink-2); margin-bottom:8px;
+  }
+  .job h3{font-size:21px; margin-bottom:10px; letter-spacing:-0.018em}
+  .job p{color:var(--ink-2); font-size:15.5px; max-width:56ch; margin-bottom:var(--s2)}
+  .job .tags{margin-top:2px}
+
+  /* ---------- TECNOLOGIAS ---------- */
+  .stack{border-top:1px solid var(--rule-2)}
+  .stack .col{
+    display:grid; grid-template-columns:190px 1fr; gap:var(--s4);
+    padding-block:var(--s3); border-bottom:1px solid var(--rule); align-items:start;
+  }
+  @media (max-width:700px){
+    .stack .col{grid-template-columns:1fr; gap:14px; padding-block:var(--s3)}
+  }
+  .stack h3{
+    font-family:var(--mono); font-size:11.5px; letter-spacing:.14em; text-transform:uppercase;
+    color:var(--accent); margin:0; font-weight:400; padding-top:9px;
+  }
+  @media (max-width:700px){ .stack h3{padding-top:0} }
+  .stack ul{list-style:none; margin:0; padding:0; display:flex; flex-wrap:wrap; gap:8px}
+  .stack li{display:block}
+  .stack .tech{
+    font-family:var(--mono); font-size:13px; color:var(--ink); background:var(--surface);
+    border:1px solid var(--rule-2); border-radius:4px; padding:7px 13px;
+    cursor:help; transition:border-color .18s var(--ease), color .18s var(--ease), background .18s var(--ease);
+  }
+  .stack .tech:hover, .stack .tech:focus-visible, .stack .tech[aria-expanded="true"]{
+    border-color:var(--accent); color:var(--accent); background:var(--surface-2);
+  }
+
+  /* card de contexto da ferramenta */
+  #techcard{
+    position:fixed; z-index:150; width:min(290px, calc(100vw - 32px));
+    background:var(--surface); border:1px solid var(--rule-2); border-radius:7px;
+    padding:15px 17px 14px; box-shadow:0 14px 40px rgba(0,0,0,.55);
+    opacity:0; transform:translateY(5px); pointer-events:none;
+    transition:opacity .14s var(--ease), transform .14s var(--ease);
+  }
+  #techcard[data-on="true"]{opacity:1; transform:none; pointer-events:auto}
+  #techcard .tc-n{
+    font-family:var(--sans); font-size:15.5px; font-weight:600; color:var(--ink);
+    margin-bottom:3px; letter-spacing:-0.01em;
+  }
+  #techcard .tc-since{
+    font-family:var(--mono); font-size:11.5px; color:var(--accent);
+    letter-spacing:.06em; margin-bottom:11px;
+  }
+  #techcard .tc-h{
+    font-family:var(--mono); font-size:9.5px; letter-spacing:.14em; text-transform:uppercase;
+    color:var(--muted); margin:0 0 5px;
+  }
+  #techcard ul{list-style:none; margin:0 0 11px; padding:0}
+  #techcard ul li{
+    font-size:13px; color:var(--ink-2); padding:2px 0 2px 13px; position:relative; line-height:1.45;
+  }
+  #techcard ul li::before{
+    content:""; position:absolute; left:0; top:9px; width:5px; height:1px; background:var(--rule-2);
+  }
+  #techcard .tc-note{font-size:12.5px; color:var(--muted); line-height:1.5; margin:0}
+  #techcard .tc-todo{
+    display:inline-block; font-family:var(--mono); font-size:10.5px; color:var(--accent);
+    border:1px dashed var(--accent-dk); border-radius:3px; padding:4px 9px; margin-top:2px;
+  }
+  @media (prefers-reduced-motion: reduce){
+    #techcard{transition:opacity .001ms; transform:none}
+  }
+
+  /* ---------- CONTATO ---------- */
+  .contact{border-top:1px solid var(--rule); padding-top:var(--s7)}
+  .contact h2{font-size:clamp(30px,5vw,48px); max-width:16ch}
+  .contact .measure{margin-bottom:var(--s5)}
+  .clinks{display:grid; grid-template-columns:repeat(3,1fr); gap:1px; background:var(--rule); border:1px solid var(--rule)}
+  @media (max-width:700px){ .clinks{grid-template-columns:1fr} }
+  .clinks a{
+    background:var(--bg); padding:var(--s4) var(--s3); text-decoration:none; display:block;
+    transition:background .25s var(--ease);
+  }
+  .clinks a:hover{background:var(--surface)}
+  .clinks .k{
+    font-family:var(--mono); font-size:11px; letter-spacing:.14em; text-transform:uppercase;
+    color:var(--muted); display:block; margin-bottom:9px;
+  }
+  .clinks .v{font-size:16px; color:var(--ink); display:flex; align-items:center; gap:9px; word-break:break-word}
+  .clinks a:hover .v{color:var(--accent)}
+  .clinks .arw{transition:transform .25s var(--ease); flex:none}
+  .clinks a:hover .arw{transform:translate(3px,-3px)}
+
+  /* ---------- FOOTER ---------- */
+  footer{border-top:1px solid var(--rule); padding-block:var(--s4); margin-top:var(--s7)}
+  footer .shell{display:flex; flex-wrap:wrap; gap:var(--s2); justify-content:space-between; align-items:center}
+  footer p{font-family:var(--mono); font-size:12px; color:var(--muted); margin:0}
+
+  /* ---------- REVEAL ---------- */
+  .js .rv{opacity:0; transform:translateY(14px)}
+  .js .rv.in{opacity:1; transform:none; transition:opacity .6s var(--ease), transform .6s var(--ease)}
+  .js .rv.d1.in{transition-delay:.07s}
+  .js .rv.d2.in{transition-delay:.14s}
+
+  .draw{stroke-dasharray:var(--len); stroke-dashoffset:var(--len); animation:draw 1.5s var(--ease) .25s forwards}
+  @keyframes draw{to{stroke-dashoffset:0}}
+  .fadein{opacity:0; animation:fi .5s var(--ease) forwards}
+  .fadein.p1{animation-delay:1.0s} .fadein.p2{animation-delay:1.15s}
+  .fadein.p3{animation-delay:1.3s} .fadein.p4{animation-delay:1.45s}
+  @keyframes fi{to{opacity:1}}
+
+  @media (prefers-reduced-motion: reduce){
+    html{scroll-behavior:auto}
+    *,*::before,*::after{animation-duration:.001ms !important; animation-delay:0s !important; transition-duration:.001ms !important}
+    .js .rv{opacity:1; transform:none}
+    .draw{stroke-dashoffset:0}
+    .fadein{opacity:1}
+  }
+</style>
+<meta name="author" content="Breno Caetano">
+<meta name="theme-color" content="#0a0c10">
+<link rel="canonical" href="https://brk-1317.github.io/portfolio/">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='6' fill='%230a0c10'/%3E%3Cpath d='M6 23 L13 18 L19 20 L26 9' fill='none' stroke='%23e0a338' stroke-width='2.5' stroke-linecap='round' stroke-linejoin='round'/%3E%3Ccircle cx='26' cy='9' r='3' fill='%23e0a338'/%3E%3C/svg%3E">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Breno Caetano">
+<meta property="og:locale" content="pt_BR">
+<meta property="og:title" content="Breno Caetano | Dados, BI e Automação">
+<meta property="og:description" content="Portfólio profissional de Breno Caetano, Analista de Dados focado em Business Intelligence, automação de processos e desenvolvimento de soluções digitais.">
+<meta property="og:url" content="https://brk-1317.github.io/portfolio/">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Breno Caetano | Dados, BI e Automação">
+<meta name="twitter:description" content="Portfólio profissional de Breno Caetano, Analista de Dados focado em Business Intelligence, automação de processos e desenvolvimento de soluções digitais.">
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"Person","name":"Breno Caetano",
+"jobTitle":"Analista de Dados","url":"https://brk-1317.github.io/portfolio/",
+"address":{"@type":"PostalAddress","addressLocality":"São Paulo","addressCountry":"BR"},
+"sameAs":["https://www.linkedin.com/in/brenocaetano-dados/","https://github.com/Brk-1317"],
+"knowsAbout":["Business Intelligence","Power BI","Power Query","Power Automate","SQL","Python","Automação de processos"]}
+</script>
+</head>
+<body>
+
+
+<a class="skip" href="#main">Pular para o conteúdo</a>
+
+<header class="hd" id="hd">
+  <div class="shell">
+    <a class="brand" href="#inicio"><span class="pip" aria-hidden="true"></span>Breno Caetano</a>
+    <nav class="nav" id="nav" aria-label="Navegação principal">
+      <a href="#inicio">Início</a>
+      <a href="#sobre">Sobre</a>
+      <a href="#solucoes">Soluções</a>
+      <a href="#projetos">Projetos</a>
+      <a href="#experiencia">Experiência</a>
+      <a href="#contato">Contato</a>
+    </nav>
+    <button class="burger" id="burger" aria-label="Abrir menu" aria-expanded="false" aria-controls="nav">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+</header>
+
+<main id="main">
+
+  <!-- ================= HERO ================= -->
+  <section class="hero" id="inicio">
+    <div class="grid-bg" aria-hidden="true"></div>
+    <div class="shell">
+      <div class="hero-grid">
+        <div>
+          <div class="eyebrow mono">Analista de Dados · BI · Automação</div>
+          <h1>Dados que geram decisões.</h1>
+          <p class="sub">Analista de Dados focado em BI, automação de processos e transformação de dados em soluções práticas para o negócio.</p>
+          <div class="techline mono" aria-label="Principais tecnologias">
+            <span>Power BI</span><span>Excel</span><span>Power Query</span><span>Power Automate</span><span>Python</span><span>SQL</span>
+          </div>
+          <div class="ctas">
+            <a class="btn btn-a" href="#projetos">Ver projetos <span class="arw" aria-hidden="true">→</span></a>
+            <a class="btn btn-b" href="#contato">Entrar em contato</a>
+          </div>
+        </div>
+
+        <div aria-hidden="true">
+          <svg class="plot" viewBox="20 28 350 246" role="presentation">
+            <path class="band" d="M44 196 L96 176 L148 186 L200 140 L252 122 L304 74 L356 58 L356 244 L44 244 Z"/>
+            <line class="axis" x1="44" y1="244" x2="360" y2="244"/>
+            <line class="axis" x1="44" y1="36" x2="44" y2="244"/>
+            <line class="tick" x1="40" y1="196" x2="44" y2="196"/>
+            <line class="tick" x1="40" y1="140" x2="44" y2="140"/>
+            <line class="tick" x1="40" y1="84" x2="44" y2="84"/>
+            <text class="tlabel" x="34" y="199" text-anchor="end">40</text>
+            <text class="tlabel" x="34" y="143" text-anchor="end">60</text>
+            <text class="tlabel" x="34" y="87" text-anchor="end">80</text>
+            <line class="tick" x1="96" y1="244" x2="96" y2="248"/>
+            <line class="tick" x1="200" y1="244" x2="200" y2="248"/>
+            <line class="tick" x1="304" y1="244" x2="304" y2="248"/>
+            <text class="tlabel" x="96" y="262" text-anchor="middle">T1</text>
+            <text class="tlabel" x="200" y="262" text-anchor="middle">T2</text>
+            <text class="tlabel" x="304" y="262" text-anchor="middle">T3</text>
+            <path class="ghost" d="M44 210 L148 202 L252 190 L356 178"/>
+            <path class="series draw" style="--len:420" d="M44 196 L96 176 L148 186 L200 140 L252 122 L304 74 L356 58"/>
+            <circle class="pt fadein p1" cx="148" cy="186" r="4"/>
+            <circle class="pt fadein p2" cx="200" cy="140" r="4"/>
+            <circle class="pt fadein p3" cx="304" cy="74" r="4"/>
+            <circle class="pt pt-hi fadein p4" cx="356" cy="58" r="5"/>
+          </svg>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= SOBRE ================= -->
+  <section id="sobre">
+    <div class="shell">
+      <div class="lbl mono"><b>01</b> Sobre</div>
+      <div class="about">
+        <h2 class="rv">Transformo informação e processo em solução prática.</h2>
+        <div class="rv d1">
+          <p class="dim">Sou profissional de dados e tecnologia. Meu trabalho é pegar informação dispersa e processo manual e devolver algo que o time consiga usar para decidir — um indicador confiável, um painel que abre rápido, uma rotina que deixou de ser feita à mão.</p>
+          <p class="dim">Na prática, isso envolve análise de dados, criação de dashboards, automação de processos, definição de indicadores e desenvolvimento de soluções internas para operações comerciais e financeiras.</p>
+          <p class="dim">Curso Ciências Econômicas no Centro Universitário FAM, com conclusão prevista para dezembro de 2026.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= SOLUÇÕES ================= -->
+  <section id="solucoes">
+    <div class="shell">
+      <div class="lbl mono"><b>02</b> Soluções</div>
+      <h2 class="rv">O que eu construo.</h2>
+      <div class="sol">
+        <article class="rv">
+          <span class="idx mono">/ 01</span>
+          <h3>Dados &amp; BI</h3>
+          <p>Dashboards, indicadores, análises e visualização de dados para apoiar decisões.</p>
+        </article>
+        <article class="rv d1">
+          <span class="idx mono">/ 02</span>
+          <h3>Automação</h3>
+          <p>Automação de tarefas e processos repetitivos utilizando tecnologia para reduzir trabalho manual.</p>
+        </article>
+        <article class="rv">
+          <span class="idx mono">/ 03</span>
+          <h3>Processos</h3>
+          <p>Organização, análise e melhoria de processos operacionais.</p>
+        </article>
+        <article class="rv d1">
+          <span class="idx mono">/ 04</span>
+          <h3>Desenvolvimento</h3>
+          <p>Criação de sistemas, ferramentas internas e soluções web para necessidades específicas.</p>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= PROJETOS ================= -->
+  <section id="projetos">
+    <div class="shell">
+      <div class="lbl mono"><b>03</b> Projetos</div>
+      <h2 class="rv">Coisas que eu construí e estão rodando.</h2>
+
+      <div class="projects">
+
+        <article class="proj rv">
+          <div class="body">
+            <div class="kicker mono">Sistema comercial</div>
+            <h3>Central do Corretor</h3>
+            <p class="desc">Sistema de acompanhamento e gestão comercial para equipes imobiliárias.</p>
+            <div class="tags">
+              <span class="tag">HTML</span><span class="tag">JavaScript</span>
+              <span class="tag">Supabase</span><span class="tag">Render</span>
+            </div>
+          </div>
+          <div class="shot has-img">
+            <img src="img/central.jpg" alt="Tela de empreendimentos da Central do Corretor, com busca, filtros por construtora e cartões de produto" loading="lazy" decoding="async" width="900" height="451">
+          </div>
+        </article>
+
+        <article class="proj rv">
+          <div class="body">
+            <div class="kicker mono">Business Intelligence</div>
+            <h3>Dashboard Comercial</h3>
+            <p class="desc">Dashboard para acompanhamento de indicadores comerciais. Reúne funil de conversão, VGV por projeto e por corretor, metas e ranking da equipe numa tela só.</p>
+            <div class="tags">
+              <span class="tag">HTML</span><span class="tag">JavaScript</span>
+              <span class="tag">Supabase</span><span class="tag">Netlify</span>
+            </div>
+          </div>
+          <div class="shot has-img">
+            <img src="img/zatra.jpg" alt="Dashboard comercial com indicadores de leads, vendas, VGV, funil de conversão e ranking de corretores" loading="lazy" decoding="async" width="900" height="451">
+          </div>
+        </article>
+
+        <article class="proj rv">
+          <div class="body">
+            <div class="kicker mono">Automação</div>
+            <h3>Automação de Relatórios</h3>
+            <p class="desc">Automação de rotinas e distribuição de indicadores.</p>
+            <div class="tags">
+              <span class="tag">Power Automate</span><span class="tag">Excel</span><span class="tag">Power BI</span>
+            </div>
+          </div>
+          <div class="shot diag">
+            <svg viewBox="0 0 330 210" role="img" aria-label="Diagrama do fluxo: fontes de dados passam por tratamento no Power Query, geram indicadores no Power BI e são distribuídos automaticamente pelo Power Automate">
+              <!-- fontes -->
+              <rect x="10" y="20" width="76" height="20" rx="3" fill="var(--surface-2)" stroke="var(--rule-2)"/>
+              <rect x="10" y="46" width="76" height="20" rx="3" fill="var(--surface-2)" stroke="var(--rule-2)"/>
+              <rect x="10" y="72" width="76" height="20" rx="3" fill="var(--surface-2)" stroke="var(--rule-2)"/>
+              <text class="dg-t" x="48" y="34" text-anchor="middle">Sistema</text>
+              <text class="dg-t" x="48" y="60" text-anchor="middle">Planilhas</text>
+              <text class="dg-t" x="48" y="86" text-anchor="middle">Exportações</text>
+              <text class="dg-c" x="48" y="108" text-anchor="middle">FONTES</text>
+
+              <!-- setas p/ tratamento -->
+              <path class="dg-l" d="M86 30 L106 30 L106 66 L120 66"/>
+              <path class="dg-l" d="M86 56 L106 56"/>
+              <path class="dg-l" d="M86 82 L106 82 L106 66"/>
+
+              <!-- tratamento -->
+              <rect x="120" y="46" width="86" height="40" rx="4" fill="var(--surface-2)" stroke="var(--accent)" stroke-opacity=".5"/>
+              <text class="dg-t" x="163" y="63" text-anchor="middle">Power Query</text>
+              <text class="dg-s" x="163" y="76" text-anchor="middle">limpeza + junção</text>
+              <text class="dg-c" x="163" y="108" text-anchor="middle">TRATAMENTO</text>
+
+              <!-- seta p/ saidas -->
+              <path class="dg-l" d="M206 66 L228 66"/>
+
+              <!-- saidas -->
+              <rect x="228" y="36" width="92" height="24" rx="3" fill="var(--surface-2)" stroke="var(--rule-2)"/>
+              <text class="dg-t" x="274" y="51" text-anchor="middle">Indicadores</text>
+              <rect x="228" y="72" width="92" height="24" rx="3" fill="var(--surface-2)" stroke="var(--rule-2)"/>
+              <text class="dg-t" x="274" y="87" text-anchor="middle">Relatório</text>
+              <path class="dg-l" d="M228 48 L218 48 L218 66"/>
+              <path class="dg-l" d="M228 84 L218 84 L218 66"/>
+              <text class="dg-c" x="274" y="108" text-anchor="middle">SAÍDAS</text>
+
+              <!-- gatilho -->
+              <line class="dg-div" x1="10" y1="128" x2="320" y2="128"/>
+              <circle cx="20" cy="152" r="4" fill="var(--accent)"/>
+              <text class="dg-t" x="34" y="156">Power Automate dispara no horário definido</text>
+              <path class="dg-l dg-dash" d="M20 160 L20 178 L300 178"/>
+              <text class="dg-s" x="34" y="192">envio automático · sem passo manual</text>
+              <circle cx="306" cy="178" r="4" fill="none" stroke="var(--accent)" stroke-width="1.5"/>
+            </svg>
+            <span class="pend mono">Esquema do fluxo</span>
+          </div>
+        </article>
+
+        <article class="proj rv">
+          <div class="body">
+            <div class="kicker mono">Dados públicos · no ar</div>
+            <h3>Mercado de trabalho no Brasil</h3>
+            <p class="desc">Dashboard interativo com dados da PNAD Contínua do IBGE. Filtros de trimestre, grupo de estados e recorte demográfico, com indicadores que recalculam conforme a seleção.</p>
+            <div class="tags">
+              <span class="tag">JavaScript</span><span class="tag">HTML</span>
+              <span class="tag">CSS</span><span class="tag">GitHub Pages</span>
+            </div>
+            <a class="live" href="https://brk-1317.github.io/mercado-trabalho-ibge/" target="_blank" rel="noopener">
+              Abrir dashboard ao vivo <span class="arw" aria-hidden="true">↗</span><span class="sr"> (abre em nova aba)</span>
+            </a>
+          </div>
+          <div class="shot has-img">
+            <img src="img/ibge.jpg" alt="Dashboard do mercado de trabalho brasileiro com filtros de trimestre e ranking de desemprego por estado" loading="lazy" decoding="async" width="900" height="451">
+          </div>
+        </article>
+
+        <article class="proj rv">
+          <div class="body">
+            <div class="kicker mono">Aplicação web</div>
+            <h3>Sistema para Barbearias</h3>
+            <p class="desc">Sistema web de agenda, clientes e financeiro, desenvolvido como projeto próprio. Os dados são modelados pensando em análise, com indicadores gerados a partir do uso.</p>
+            <div class="tags">
+              <span class="tag">JavaScript</span><span class="tag">Chart.js</span>
+              <span class="tag">Firebase</span><span class="tag">HTML</span><span class="tag">CSS</span>
+            </div>
+          </div>
+          <div class="shot has-img">
+            <img src="img/barbearia.jpg" alt="Agenda semanal do sistema para barbearias, com horários agendados, bloqueios e dias de folga" loading="lazy" decoding="async" width="900" height="451">
+          </div>
+        </article>
+
+        <article class="proj rv">
+          <div class="body">
+            <div class="kicker mono">Desenvolvimento web</div>
+            <h3>Projetos Nexo Digital</h3>
+            <p class="desc">Projetos de desenvolvimento web, sistemas e soluções digitais. Espaço reservado para os próximos trabalhos.</p>
+            <div class="tags">
+              <span class="tag">A definir</span>
+            </div>
+          </div>
+          <div class="shot has-img fit-square">
+            <img src="img/nexo.jpg" alt="Material de apresentação da marca Nexo Digital" loading="lazy" decoding="async" width="900" height="451">
+          </div>
+        </article>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= EXPERIÊNCIA ================= -->
+  <section id="experiencia">
+    <div class="shell">
+      <div class="lbl mono"><b>04</b> Experiência</div>
+      <h2 class="rv">Trajetória.</h2>
+      <div class="tl">
+
+        <article class="job rv">
+          <div class="when mono">mar/2026<span class="now">— atual</span></div>
+          <div>
+            <div class="org mono">Econ Construtora</div>
+            <h3>Analista de Dados</h3>
+            <p>Atuação direta com o gerente de vendas, com foco em indicadores e desempenho de uma equipe de 34 corretores. Inclui análise de KPIs comerciais, organização da rotina de acompanhamento e desenvolvimento de plataformas internas.</p>
+            <div class="tags">
+              <span class="tag">Power BI</span><span class="tag">Excel</span>
+              <span class="tag">KPIs comerciais</span><span class="tag">Soluções internas</span>
+            </div>
+          </div>
+        </article>
+
+        <article class="job rv">
+          <div class="when mono">jun/2024<br>— abr/2025</div>
+          <div>
+            <div class="org mono">Crefisa</div>
+            <h3>Assistente de Produtos</h3>
+            <p>Acompanhamento e análise de dados de produtos financeiros, apoiando a gestão na priorização de demandas. Monitoramento de transações de PIX, análise da base de usuários ativos de cartão de crédito e construção de indicadores e relatórios usados na tomada de decisão.</p>
+            <div class="tags">
+              <span class="tag">Excel</span><span class="tag">Power BI</span>
+              <span class="tag">Indicadores</span><span class="tag">Gestão de projetos</span>
+            </div>
+          </div>
+        </article>
+
+        <article class="job rv">
+          <div class="when mono">jan/2023<br>— abr/2025</div>
+          <div>
+            <div class="org mono">Cury Construtora</div>
+            <h3>Analista de Planejamento</h3>
+            <p>Atuação direta com o gerente de vendas, dando visibilidade aos resultados de uma equipe de 20 corretores. Estruturação de controles de desempenho, indicadores comerciais e metas, além do desenvolvimento da Plataforma de Performance Comercial e da Plataforma de Controle de Comissões.</p>
+            <div class="tags">
+              <span class="tag">Power BI</span><span class="tag">Excel</span>
+              <span class="tag">Power Query</span><span class="tag">Controles financeiros</span>
+            </div>
+          </div>
+        </article>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= TECNOLOGIAS ================= -->
+  <section id="tecnologias">
+    <div class="shell">
+      <div class="lbl mono"><b>05</b> Tecnologias</div>
+      <h2 class="rv">Ferramentas de trabalho.</h2>
+      <div class="stack">
+        <div class="col rv">
+          <h3>BI &amp; Dados</h3>
+          <ul>
+            <li><button type="button" class="tech" data-k="powerbi" aria-expanded="false">Power BI</button></li><li><button type="button" class="tech" data-k="excel" aria-expanded="false">Excel</button></li><li><button type="button" class="tech" data-k="pquery" aria-expanded="false">Power Query</button></li><li><button type="button" class="tech" data-k="sql" aria-expanded="false">SQL</button></li><li><button type="button" class="tech" data-k="python" aria-expanded="false">Python</button></li>
+          </ul>
+        </div>
+        <div class="col rv d1">
+          <h3>Automação</h3>
+          <ul><li><button type="button" class="tech" data-k="pauto" aria-expanded="false">Power Automate</button></li></ul>
+        </div>
+        <div class="col rv d2">
+          <h3>Desenvolvimento</h3>
+          <ul>
+            <li><button type="button" class="tech" data-k="html" aria-expanded="false">HTML</button></li><li><button type="button" class="tech" data-k="css" aria-expanded="false">CSS</button></li><li><button type="button" class="tech" data-k="js" aria-expanded="false">JavaScript</button></li><li><button type="button" class="tech" data-k="supabase" aria-expanded="false">Supabase</button></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= CONTATO ================= -->
+  <section id="contato">
+    <div class="shell">
+      <div class="contact">
+        <div class="lbl mono"><b>06</b> Contato</div>
+        <h2 class="rv">Vamos transformar dados em soluções?</h2>
+        <p class="dim measure rv d1">Estou aberto a oportunidades profissionais, projetos e conversas sobre dados, BI, automação e tecnologia.</p>
+        <div class="clinks rv d1">
+          <a href="https://www.linkedin.com/in/brenocaetano-dados/" target="_blank" rel="noopener">
+            <span class="k mono">LinkedIn</span>
+            <span class="v">/in/brenocaetano-dados <span class="arw" aria-hidden="true">↗</span><span class="sr"> (abre em nova aba)</span></span>
+          </a>
+          <a href="https://github.com/Brk-1317" target="_blank" rel="noopener">
+            <span class="k mono">GitHub</span>
+            <span class="v">github.com/Brk-1317 <span class="arw" aria-hidden="true">↗</span><span class="sr"> (abre em nova aba)</span></span>
+          </a>
+          <a href="mailto:b.caetano1317@gmail.com">
+            <span class="k mono">E-mail</span>
+            <span class="v">b.caetano1317@gmail.com</span>
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+
+<div id="techcard" role="tooltip" aria-hidden="true"></div>
+
+</main>
+
+<footer>
+  <div class="shell">
+    <p class="mono">Breno Caetano · Analista de Dados · São Paulo</p>
+    <p class="mono">Ciências Econômicas · FAM · dez/2026</p>
+  </div>
+</footer>
+
+<script>
+(function(){
+  "use strict";
+  var doc = document.documentElement;
+  doc.classList.add('js');
+
+  var reduz = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  /* --- header ao rolar --- */
+  var hd = document.getElementById('hd');
+  function onScroll(){ hd.classList.toggle('stuck', window.scrollY > 12); }
+  onScroll();
+  window.addEventListener('scroll', onScroll, {passive:true});
+
+  /* --- menu mobile --- */
+  var burger = document.getElementById('burger');
+  var nav = document.getElementById('nav');
+  function fechaMenu(){
+    nav.removeAttribute('data-open');
+    burger.setAttribute('aria-expanded','false');
+    burger.setAttribute('aria-label','Abrir menu');
+  }
+  burger.addEventListener('click', function(){
+    var aberto = burger.getAttribute('aria-expanded') === 'true';
+    if(aberto){ fechaMenu(); }
+    else {
+      nav.setAttribute('data-open','true');
+      burger.setAttribute('aria-expanded','true');
+      burger.setAttribute('aria-label','Fechar menu');
+    }
+  });
+  nav.addEventListener('click', function(e){ if(e.target.tagName === 'A') fechaMenu(); });
+  document.addEventListener('keydown', function(e){
+    if(e.key === 'Escape' && burger.getAttribute('aria-expanded') === 'true'){ fechaMenu(); burger.focus(); }
+  });
+
+  /* --- reveal --- */
+  var alvos = Array.prototype.slice.call(document.querySelectorAll('.rv'));
+  if(reduz || !('IntersectionObserver' in window)){
+    alvos.forEach(function(el){ el.classList.add('in'); });
+  } else {
+    var io = new IntersectionObserver(function(entradas){
+      entradas.forEach(function(en){
+        if(en.isIntersecting){ en.target.classList.add('in'); io.unobserve(en.target); }
+      });
+    }, {rootMargin:'0px 0px -8% 0px', threshold:0.08});
+    alvos.forEach(function(el){ io.observe(el); });
+  }
+
+  /* --- seção ativa na nav: cálculo determinístico no scroll --- */
+  var itens = {};
+  Array.prototype.slice.call(nav.querySelectorAll('a')).forEach(function(a){
+    itens[a.getAttribute('href').slice(1)] = a;
+  });
+  var secoes = Array.prototype.slice.call(document.querySelectorAll('main section[id]'))
+    .filter(function(s){ return itens[s.id]; });
+
+  var ticking = false;
+  function marcaAtiva(){
+    ticking = false;
+    var linha = window.innerHeight * 0.34;
+    var atual = secoes.length ? secoes[0].id : null;
+    for(var i=0; i<secoes.length; i++){
+      if(secoes[i].getBoundingClientRect().top <= linha) atual = secoes[i].id;
+    }
+    if(window.scrollY < 40) atual = secoes[0].id;
+    if(window.innerHeight + window.scrollY >= document.documentElement.scrollHeight - 8){
+      atual = secoes[secoes.length-1].id;
+    }
+    Object.keys(itens).forEach(function(k){
+      if(k === atual) itens[k].setAttribute('aria-current','true');
+      else itens[k].removeAttribute('aria-current');
+    });
+  }
+  function pedeMarca(){ if(!ticking){ ticking = true; requestAnimationFrame(marcaAtiva); } }
+  marcaAtiva();
+  window.addEventListener('scroll', pedeMarca, {passive:true});
+  window.addEventListener('resize', pedeMarca);
+
+  /* --- card de contexto das tecnologias --- */
+  /* Conteúdo derivado exclusivamente das experiências e certificações reais.
+     Onde não há evidência de uso, o campo fica marcado para preenchimento. */
+  var TECH = {
+    powerbi:{n:'Power BI', desde:'Desde 2023',
+      onde:['Cury Construtora — dashboards de desempenho da equipe','Crefisa — relatórios e painéis para a gestão','Econ Construtora — KPIs comerciais'],
+      nota:'Certificação Fundação Bradesco. Curso de Criação de Dashboard pela Crefisa (2025).'},
+    excel:{n:'Excel', desde:'Desde 2022',
+      onde:['Tuti Flores — controles e relatórios de vendas','Cury Construtora — tabelas dinâmicas e metas','Crefisa — indicadores de produtos financeiros'],
+      nota:'Excel Avançado pela Crefisa (2024 e 2025). Microsoft Excel pela Fundação Bradesco (2020).'},
+    pquery:{n:'Power Query', desde:'Desde 2023',
+      onde:['Cury Construtora — junção de bases para relatórios','Crefisa — tratamento de dados de produtos'],
+      nota:'Usado para limpar e cruzar bases antes de virarem indicador.'},
+    pauto:{n:'Power Automate', desde:'Desde 2023',
+      onde:['Crefisa — estágio na área de Gestão e Modelagem de Produtos'],
+      nota:'Automação de rotinas da área, extração de relatórios e envio de e-mails.'},
+    sql:{n:'SQL', desde:'Desde 2024',
+      onde:['Crefisa — análise de dados em grande escala'],
+      nota:'Consultas sobre bases extensas de produtos financeiros.'},
+    python:{n:'Python', desde:'Certificação em jan/2026',
+      onde:['Cury Construtora — lógica de automação de processos e relatórios','Econ Construtora — lógica de automação de processos e relatórios'],
+      nota:'Certificação pela Fundação Bradesco.'},
+    html:{n:'HTML', desde:'Desde 2023',
+      onde:['Central do Corretor','Dashboard Comercial — Zatra House','Sistema para Barbearias','Dashboard do mercado de trabalho']},
+    css:{n:'CSS', desde:'Desde mar/2026',
+      onde:['Central do Corretor','Dashboard Comercial — Zatra House','Sistema para Barbearias','Dashboard do mercado de trabalho'],
+      nota:'Comecei na Econ Construtora.'},
+    js:{n:'JavaScript', desde:'Desde mar/2026',
+      onde:['Central do Corretor','Dashboard Comercial — Zatra House','Sistema para Barbearias — com Chart.js','Dashboard do mercado de trabalho'],
+      nota:'Comecei na Econ Construtora.'},
+    supabase:{n:'Supabase', desde:'Desde mar/2026',
+      onde:['Central do Corretor','Dashboard Comercial — Zatra House'],
+      nota:'Banco e autenticação dos dois sistemas comerciais. Comecei na Econ Construtora.'}
+  };
+
+  var card = document.getElementById('techcard');
+  var botoes = Array.prototype.slice.call(document.querySelectorAll('.tech'));
+  var atual = null, tShow = null, tHide = null, abertoEm = 0;
+
+  function esc(t){ return String(t).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;'); }
+
+  function monta(d){
+    var h = '<div class="tc-n">' + esc(d.n) + '</div>';
+    if(d.desde) h += '<div class="tc-since">' + esc(d.desde) + '</div>';
+    if(d.onde && d.onde.length){
+      h += '<p class="tc-h">Onde usei</p><ul>';
+      d.onde.forEach(function(o){ h += '<li>' + esc(o) + '</li>'; });
+      h += '</ul>';
+    }
+    if(d.nota) h += '<p class="tc-note">' + esc(d.nota) + '</p>';
+    if(d.todo) h += '<span class="tc-todo">' + esc(d.todo) + '</span>';
+    return h;
+  }
+
+  function posiciona(btn){
+    var r = btn.getBoundingClientRect();
+    var cr = card.getBoundingClientRect();
+    var x = r.left + r.width/2 - cr.width/2;
+    var y = r.bottom + 10;
+    x = Math.max(16, Math.min(x, window.innerWidth - cr.width - 16));
+    if(y + cr.height > window.innerHeight - 16){ y = r.top - cr.height - 10; }
+    if(y < 16) y = 16;
+    card.style.left = Math.round(x) + 'px';
+    card.style.top  = Math.round(y) + 'px';
+  }
+
+  function abre(btn){
+    clearTimeout(tHide);
+    var d = TECH[btn.getAttribute('data-k')];
+    if(!d) return;
+    if(atual && atual !== btn) atual.setAttribute('aria-expanded','false');
+    atual = btn;
+    card.innerHTML = monta(d);
+    card.setAttribute('data-on','true');
+    card.setAttribute('aria-hidden','false');
+    btn.setAttribute('aria-expanded','true');
+    abertoEm = Date.now();
+    posiciona(btn);
+  }
+
+  function fecha(){
+    clearTimeout(tShow);
+    card.removeAttribute('data-on');
+    card.setAttribute('aria-hidden','true');
+    if(atual){ atual.setAttribute('aria-expanded','false'); atual = null; }
+  }
+  function fechaComFolga(){ clearTimeout(tHide); tHide = setTimeout(fecha, 160); }
+
+  botoes.forEach(function(btn){
+    btn.addEventListener('mouseenter', function(){
+      clearTimeout(tHide); clearTimeout(tShow);
+      tShow = setTimeout(function(){ abre(btn); }, 60);
+    });
+    btn.addEventListener('mouseleave', function(){ clearTimeout(tShow); fechaComFolga(); });
+    btn.addEventListener('focus', function(){ clearTimeout(tHide); abre(btn); });
+    btn.addEventListener('blur', function(){ fechaComFolga(); });
+    btn.addEventListener('click', function(e){
+      e.preventDefault();
+      if(atual === btn && Date.now() - abertoEm > 300) fecha();
+      else abre(btn);
+    });
+  });
+
+  /* WCAG: o card precisa ser alcançável pelo ponteiro e dispensável pelo Esc */
+  card.addEventListener('mouseenter', function(){ clearTimeout(tHide); });
+  card.addEventListener('mouseleave', fechaComFolga);
+  document.addEventListener('keydown', function(e){ if(e.key === 'Escape' && atual) { var b = atual; fecha(); b.focus(); } });
+  window.addEventListener('scroll', function(){ if(atual) posiciona(atual); }, {passive:true});
+  window.addEventListener('resize', function(){ if(atual) posiciona(atual); });
+
+})();
+</script>
+
+</body>
+</html>
